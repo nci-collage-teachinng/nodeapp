@@ -27,39 +27,6 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
-router.post('/user',function(req,res){
-  var name=req.body.name;
-
-  let query = "INSERT INTO `TestUser` (name) VALUES ('" +name+ "')";
-                         db.query(query, (err, result) => {
-                             if (err) {
-                                 return res.status(500).send(err);
-                             }
-
-                         });
-
-
-  res.sendStatus(200);
-
-});
-
-router.get('/user',function(req,res){
-
-  user_list = {}
-  let query = "select * from TestUser";
-  db.query(query, (err, result) => {
-        if (err) {
-                  return res.status(500).send(err);
-              }
-
-      result.forEach (user => {
-        user_list[user.idTestUser]  =   user.name
-      })
-    res.status(200).json(JSON.stringify(user_list));
-  });
-
-
-});
 
 
 
