@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>Express HTML</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="jquery-3.4.1.min.js"></script>
+  <script>
+  $(document).ready(function(){
+
+    loadList()
+    $('a[href = "#add_user"]').click(function(){
+
+      var data = {};
+					data.name = $("input[name='user_name']").val();
+
+
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(data),
+				        contentType: 'application/json',
+                        url: '/user',
+                        success: function(data) {
+                            console.log('success');
+                            console.log(JSON.stringify(data));
+                        }
+              });
+  });
+});
+
+function loadList(){
+
+  $.get("/user", function(data, status){
+    
+    var list = document.getElementById('PersonaList');
+
+    $.each(data , function(key, value) {
+
+      $("#PersonaList").append('<li><a href="/user/' +key + '">' + value + '</a></li>');
+
+});
+      
+
+    
+
+  });
+
+}
+  </script>
+</head>
+<body>
+  <div style="margin:100px;">
+    <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+    <p>  <input type="text" name="user_name" value=""> </input> </p>
+
+      <p><a class="btn btn-primary btn-lg" href="#add_user" role="button">Learn more</a></p>
+    </div>
+
+    <div>
+      <ol id="PersonaList"></ol>
+
+    </div>
+
+  </div>
+</body>
+</html>
