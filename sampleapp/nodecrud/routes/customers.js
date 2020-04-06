@@ -79,6 +79,39 @@ exports.save = function(req,res){
     });
 };
 
+
+/*Save the customer*/
+exports.location = function(req,res){
+    
+    
+    req.getConnection(function (err, connection) {
+        
+        var data = {
+            
+            name    : input.name,
+            address : input.address,
+            email   : input.email,
+            phone   : input.phone 
+        
+        };
+        
+        var query = connection.query("select * from location 
+        {
+ 
+                                     
+                                      //CREATE ROW JSON OBJECT
+        });
+      
+      RETURN JSONOBJECT
+        
+       // console.log(query.sql); get raw query
+    
+    });
+};
+
+
+
+
 exports.save_edit = function(req,res){
     
     var input = JSON.parse(JSON.stringify(req.body));
